@@ -1,5 +1,7 @@
 *.js
 !jest.config.js
+!lib/mappings/**/*.js
+!lib/handlers/**
 *.d.ts
 node_modules
 

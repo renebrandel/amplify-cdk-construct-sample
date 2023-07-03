@@ -2,13 +2,16 @@
   "app": "npx ts-node --prefer-ts-exts bin/amplify-cdk-construct-sample.ts",
   "watch": {
     "include": [
-      "**"
+      "**",
+      "lib/mappings/*.js",
+      "lib/handlers/**"
     ],
     "exclude": [
       "README.md",
       "cdk*.json",
       "**/*.d.ts",
-      "**/*.js",
+      "lib/*.js",
+      "bin/*.js",
       "tsconfig.json",
       "package*.json",
       "yarn.lock",
