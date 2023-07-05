@@ -1,15 +1,14 @@
 # Test the Amplify GraphQL API L3 CDK construct (pre-alpha)
 
-🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
+🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧
 
 **DO NOT USE IN PRODUCTION ENVIRONMENTS - FOR TESTING ONLY**
 
-🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
+🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧
 
 This is a sample repository showcasing the Amplify GraphQL API L3 CDK construct (pre-alpha) in action. It allows you to leverage all the benefits of the Amplify GraphQL directives (`@model`, `@auth`, etc.) via CDK. 
 
 ## Key features
-
 - 🔗 **GraphQL APIs and connected DynamoDB tables with a single schema**
   - Use the `@model` directive from Amplify to generate both an AppSync API with CRUDL operations and their connected DynamoDB sources. A five line GraphQL schema in Amplify would’ve taken hundreds of lines of code and multiple files to write previously.
 - 🤯 **Use all Amplify GraphQL directives such as `@auth`**
@@ -39,10 +38,10 @@ Go to `lib/backend-stack.ts` to start exploring the code base:
 
 ## Still work-in-progress items
 
-[ ] Final API namings and shapes
-[ ] First-class mechanism to author custom resolver code (right now you still need to escape hatch to the L1/L2 constructs)
-[ ] Generate client configurations and GraphQL client code for Amplify libraries
-[ ] Support to work in conjunction with Amplify Studio
+- [ ] Final API namings and shapes
+- [ ] First-class mechanism to author custom resolver code (right now you still need to escape hatch to the L1/L2 constructs)
+- [ ] Generate client configurations and GraphQL client code for Amplify libraries
+- [ ] Support to work in conjunction with Amplify Studio
 
 ## Useful commands
 * `cdk watch --hotswap-fallback` watches and deploy ongoing file changes
