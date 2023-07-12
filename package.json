@@ -20,9 +20,9 @@
     "typescript": "~4.9.5"
   },
   "dependencies": {
+    "@aws-amplify/graphql-construct-alpha": "^0.3.2",
     "@aws-appsync/utils": "^1.2.5",
-    "agqlac": "0.4.0-agqlac.0",
-    "aws-cdk-lib": "2.69.0",
+    "aws-cdk-lib": "^2.87.0",
     "constructs": "^10.0.0",
     "source-map-support": "^0.5.21"
   }
