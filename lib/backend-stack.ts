@@ -59,11 +59,8 @@ export class BackendStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_18_X
     })
 
-
     // Alternatively, extend AppSync L2 Construct to use JS or VTL resolvers
-    const appSyncApi = appsync.GraphqlApi.fromGraphqlApiAttributes(this, "api", {
-      graphqlApiId: amplifyApi.resources.cfnGraphqlApi.attrApiId,
-    })
+    const appSyncApi = amplifyApi.resources.graphqlApi 
 
     // OPTION 2: Use a custom JS resolver
     // (demo shows how to connect AppSync to SNS)
@@ -72,6 +69,9 @@ export class BackendStack extends cdk.Stack {
     // OPTION 3: Use a custom VTL resolver
     // (demo shows how to build a PubSub API with VTL unit resolver + NONE data source)
     this.addPubSubHandler(appSyncApi)
+
+    // UNCOMMENT the line below to configure a Private API (setting only available on L1)
+    // amplifyApi.resources.cfnResources.cfnGraphqlApi.visibility = 'PRIVATE'
   }
 
   private addPubSubHandler(appSyncApi: appsync.IGraphqlApi) {
@@ -92,7 +92,7 @@ export class BackendStack extends cdk.Stack {
   private addSNSTopicHandler(appSyncApi: appsync.IGraphqlApi) {
     // 1. Create a new topic and setup an email subscription
     const topic = new Topic(this, 'Amplify-Cdk-Test-Topic')
-    topic.addSubscription(new EmailSubscription("ENTER_YOUR_EMAIL_HERE"))
+    topic.addSubscription(new EmailSubscription("renbran@amazon.com"))
                                               // ^ ENTER YOUR EMAIL HERE
 
     // 2. Create a data source to connect AppSync to the SNS topic
