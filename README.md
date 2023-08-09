@@ -26,7 +26,7 @@ This is a sample repository showcasing the Amplify GraphQL API L3 CDK construct 
 1. A `Blog` DynamoDB table with authorization rules permitting anyone with an API Key to Create/Read/Update/Delete the items to the table.
 2. A `echo` query that returns whatever string is sent to it using a Lambda function handler.
 3. A `sendEmail` mutation that publishes an SNS event with an email subscription using **JavaScript resolvers**.
-4. A PubSub API (`Mutation.publish`, `Subscription.subscribe`) with that allows anyone to publish/subscribe based on a channel & pass freeform data. Uses **VTL resolvers**. 
+4. A PubSub API (`Mutation.publish`, `Subscription.subscribe`) that allows anyone to publish/subscribe based on a channel & pass freeform data. Uses **VTL resolvers**. 
 
 ## Quick tour of `lib/backend-stack.ts`
 
