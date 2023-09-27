@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import * as path from 'path'
-import { AmplifyGraphqlApi } from '@aws-amplify/graphql-construct-alpha';
+import { AmplifyGraphqlApi, AmplifyGraphqlSchema } from '@aws-amplify/graphql-construct-alpha';
 import * as appsync from 'aws-cdk-lib/aws-appsync';
 import { Topic } from 'aws-cdk-lib/aws-sns';
 import { EmailSubscription } from 'aws-cdk-lib/aws-sns-subscriptions';
@@ -11,36 +11,7 @@ export class BackendStack extends cdk.Stack {
     super(scope, id, props);
 
     const amplifyApi = new AmplifyGraphqlApi(this, 'AmplifyCdkGraphQlApi', {
-      schema: /* GraphQL */ `
-
-        # @model creates a DynamoDB and auto-generates CRUDL operations for the GraphQL API:
-        # https://docs.amplify.aws/cli/graphql/data-modeling/
-
-        # @auth allows you to configure authorization rules see:
-        # https://docs.amplify.aws/cli/graphql/authorization-rules/
-        type Blog @model @auth(rules: [{ allow: public }]) {
-          content: String
-          completed: Boolean
-        }
-
-        type Query {
-          echo(message: String!): String @function(name: "EchoLambda")
-        }
-
-        type Mutation {  
-          sendEmail(from: String, message: String): String
-          publish(name: String!, data: AWSJSON!): Channel
-        }
-
-        type Subscription {
-          subscribe(name: String!): Channel @aws_subscribe(mutations: ["publish"])
-        }
-
-        type Channel {
-          name: String!
-          data: AWSJSON!
-        }
-      `,
+      schema: AmplifyGraphqlSchema.fromSchemaFiles(appsync.SchemaFile.fromAsset(path.join(__dirname, 'schema.graphql'))),
       authorizationConfig: {
         defaultAuthMode: 'API_KEY',
         apiKeyConfig: {
@@ -50,7 +21,6 @@ export class BackendStack extends cdk.Stack {
     })
 
     // HOW TO USE CUSTOM BUSINESS LOGIC - THREE POSSIBLE OPTIONS
-
     // OPTION 1: Use Lambda function
     const echoLambda = new lambda.Function(this, 'EchoLambda', {
       functionName: 'EchoLambda', // MAKE SURE THIS MATCHES THE @function's "name" PARAMETER
