@@ -1,12 +1,6 @@
-# Test the Amplify GraphQL API L3 CDK construct (pre-alpha)
+# Sample for the Amplify GraphQL API L3 CDK construct
 
-🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧
-
-**DO NOT USE IN PRODUCTION ENVIRONMENTS - FOR TESTING ONLY**
-
-🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧
-
-This is a sample repository showcasing the Amplify GraphQL API L3 CDK construct (pre-alpha) in action. It allows you to leverage all the benefits of the Amplify GraphQL directives (`@model`, `@auth`, etc.) via CDK. 
+This is a sample repository showcasing the Amplify GraphQL API L3 CDK construct in action. It allows you to leverage all the benefits of the Amplify GraphQL directives (`@model`, `@auth`, etc.) via CDK. 
 
 ## Key features
 - 🔗 **GraphQL APIs and connected DynamoDB tables with a single schema**
@@ -26,22 +20,12 @@ This is a sample repository showcasing the Amplify GraphQL API L3 CDK construct 
 1. A `Blog` DynamoDB table with authorization rules permitting anyone with an API Key to Create/Read/Update/Delete the items to the table.
 2. A `echo` query that returns whatever string is sent to it using a Lambda function handler.
 3. A `sendEmail` mutation that publishes an SNS event with an email subscription using **JavaScript resolvers**.
-4. A PubSub API (`Mutation.publish`, `Subscription.subscribe`) that allows anyone to publish/subscribe based on a channel & pass freeform data. Uses **VTL resolvers**. 
 
 ## Quick tour of `lib/backend-stack.ts`
 
 Go to `lib/backend-stack.ts` to start exploring the code base:
 - `lib/backend-stack.ts` includes the AmplifyGraphQlApi CDK construct. You can pass in any schema that works with the Amplify CLI today.
-- `lib/mappings` include the resolver mapping templates and functions. The `publish.req.vtl` and `publish.res.vtl` files are the required files for a basic PubSub application. See `addPubSubHandler()` for sample code.
 - `addSNSTopicHandler()` showcases how to use the escape hatch to connect the generated L2 construct with additional resources within your AWS account such as an SNS topic. **IMPORTANT: make sure to enter your email into the ENTER_YOUR_EMAIL_HERE to receive the SNS notifications**
-
-
-## Still work-in-progress items
-
-- [ ] Final API namings and shapes
-- [ ] First-class mechanism to author custom resolver code (right now you still need to escape hatch to the L1/L2 constructs)
-- [ ] Generate client configurations and GraphQL client code for Amplify libraries
-- [ ] Support to work in conjunction with Amplify Studio
 
 ## Useful commands
 * `cdk watch --hotswap-fallback` watches and deploy ongoing file changes
