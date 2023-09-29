@@ -14,11 +14,6 @@ type Query {
 
 type Mutation {  
   sendEmail(from: String, message: String): String
-  publish(name: String!, data: AWSJSON!): Channel
-}
-
-type Subscription {
-  subscribe(name: String!): Channel @aws_subscribe(mutations: ["publish"])
 }
 
 type Channel {

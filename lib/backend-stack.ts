@@ -20,7 +20,7 @@ export class BackendStack extends cdk.Stack {
       },
     })
 
-    // HOW TO USE CUSTOM BUSINESS LOGIC - THREE POSSIBLE OPTIONS
+    // HOW TO USE CUSTOM BUSINESS LOGIC - TWO POSSIBLE OPTIONS
     // OPTION 1: Use Lambda function
     const echoLambda = new lambda.Function(this, 'EchoLambda', {
       functionName: 'EchoLambda', // MAKE SURE THIS MATCHES THE @function's "name" PARAMETER
@@ -32,10 +32,6 @@ export class BackendStack extends cdk.Stack {
     // OPTION 2: Use a custom JS resolver
     // (demo shows how to connect AppSync to SNS)
     this.addSNSTopicHandler(amplifyApi)
-
-    // OPTION 3: Use a custom VTL resolver
-    // (demo shows how to build a PubSub API with VTL unit resolver + NONE data source)
-    this.addPubSubHandler(amplifyApi)
 
     // UNCOMMENT the line below to configure a Private API (setting only available on L1)
     // amplifyApi.resources.cfnResources.cfnGraphqlApi.visibility = 'PRIVATE'
@@ -90,19 +86,4 @@ export class BackendStack extends cdk.Stack {
       pipelineConfig: [sendEmailFunction]
     })
   }
-
-  private addPubSubHandler(amplifyApi: AmplifyGraphqlApi) {
-    // 1. Create a "NONE" data source to handle publish request locally within AppSync
-    const dataSource = amplifyApi.addNoneDataSource("PubSubNone")
-
-    // 2. Forward the published data based on channel name upon "Mutation.publish"
-   amplifyApi.addResolver("PubSubResolver", {
-      dataSource: dataSource,
-      typeName: "Mutation",
-      fieldName: "publish",
-      requestMappingTemplate: appsync.MappingTemplate.fromFile(path.join(__dirname, "mappings/publish.req.vtl")),
-      responseMappingTemplate: appsync.MappingTemplate.fromFile(path.join(__dirname, "mappings/publish.res.vtl")),
-    })
-  }
-
 }
